@@ -8,12 +8,13 @@
 /**
  * Class : Dictionary
  * Description : super class for reference-focused objects.
- * This is abstract class.
+ *  This is abstract class.
  */
 class Dictionary : public Object {
 
 public:
 	void setSubtype(string subtype);
+
 	virtual void referenceObjectNo(int objectNo) = 0;
 	virtual string generateCode() = 0;
 
@@ -25,8 +26,8 @@ protected:
 /**
  * Class : Catalog
  * Description : Root of PDF object hierarchy.
- * Depth 1 of PDF object hieararchy.
- * Child pages reference ParentPage.
+ *  Depth 1 of PDF object hieararchy.
+ *  Child pages reference ParentPage.
  */
 class Catalog : public Dictionary
 {
@@ -44,8 +45,8 @@ private:
 /**
  * Class : Page
  * Description : PDF page object. it looks their parent.
- * Depth 3 of PDF object hieararchy.
- * Page references its Parent a.k.a Pages, Content a.k.a Text.
+ *  Depth 3 of PDF object hieararchy.
+ *  Page references its Parent a.k.a Pages, Content a.k.a Text.
  */
 class Page : public Dictionary {
 
@@ -75,8 +76,8 @@ private:
 /**
  * Class : Pages
  * Description : Parent page. it manages child pages.
- * Depth 2 of PDF object hieararchy.
- * Parent page references child pages by array and knows number of its childs.
+ *  Depth 2 of PDF object hieararchy.
+ *  Parent page references child pages by array and knows number of its childs.
  */
 class Pages : public Dictionary
 {
@@ -85,6 +86,7 @@ public:
 	Pages();
 	int getCount();
 	void setCount();
+
 	void referenceObjectNo(int objectNo);
 	string generateCode();
 

@@ -7,10 +7,10 @@
 /**
  * Class : PrimaryFont
  * Description : basic font object.
- * Adobe based fonts(e.g. Helvetica, Times New Roman, Arial, ...) 
- * can be identically implied in pdf document and interpreted by PDF renderers.
- * Others can need sub-font and font-descriptor.
- * Depth 5 of PDF object hierarchy
+ *  Adobe based fonts(e.g. Helvetica, Times New Roman, Arial, ...) 
+ *  can be identically implied in pdf document and interpreted by PDF renderers.
+ *  Others can need sub-font and font-descriptor.
+ *  Depth 5 of PDF object hierarchy
  */
 class PrimaryFont : public Dictionary
 {
@@ -34,20 +34,21 @@ protected:
 /** 
  * Class : SubFont
  * Description : descript and reference about Subfont.
- * CIDFont system can be used for Subfont about CJK(Chinese-Japanese-Korean) 
- * language based font support.
- * CIDFonts need Font Descriptor for specifying their glyph identity.
- * A CIDFont dictionary is a PDF object that 
- * contains information about a CIDFont program.
- * !! MORE THAN TWO SUBFONTS MUST BE PRESENTED AS ARRAY SEQUENCE IN PDF CODE !!
- * e.g. [ 7 0 R 8 0 R 9 0 R 10 0 R ]
- * Depth 6 of PDF object hierarchy
+ *  CIDFont system can be used for Subfont about CJK(Chinese-Japanese-Korean) 
+ *  language based font support.
+ *  CIDFonts need Font Descriptor for specifying their glyph identity.
+ *  A CIDFont dictionary is a PDF object that 
+ *  contains information about a CIDFont program.
+ *  !! MORE THAN TWO SUBFONTS MUST BE PRESENTED AS ARRAY SEQUENCE IN PDF CODE !!
+ *  e.g. [ 7 0 R 8 0 R 9 0 R 10 0 R ]
+ *  Depth 6 of PDF object hierarchy
  */
 class SubFont : public Dictionary
 {
 
 public:
 	SubFont();
+	string getCidSystemInfo();
 	void setBaseFont(string fontName);
 	void setFontDescriptor(int objectNo);
 	void setW(int w1, int w2, int w3);
@@ -59,6 +60,7 @@ public:
 
 private:
 	string baseFont;
+	string cidSystemInfo;
 	int fontDescriptor;
 	int w[3];
 	int dw;
@@ -68,8 +70,8 @@ private:
 /** 
  * Class : FontDescriptor
  * Description : descript CIDFont font family.
- * It implies core informations about CIDFont such as glyph informations.
- * Depth 7 of pdf object hierarchy
+ *  It implies core informations about CIDFont such as glyph informations.
+ *  Depth 7 of pdf object hierarchy
  */
 class FontDescriptor : public Object
 {
@@ -97,7 +99,7 @@ private:
 	string fontName;
 	string fontFamily;
 	int flags;
-	int fontBBox[4];
+	int fontBbox[4];
 	int italicAngle;
 	int ascent;
 	int descent;
@@ -113,7 +115,7 @@ private:
 /**
  * Class : CIDSystemInfo
  * Description : set encoding information for CID fonts.
- * It can be included by font object
+ *  It can be included by font object
  */
 class CIDSystemInfo : public Object
 {

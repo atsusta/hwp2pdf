@@ -1,21 +1,47 @@
-﻿빌드 시작: 2015-03-16 오후 9:19:49
-     1>2 노드의 "C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\xh2pdf\xh2pdf.vcxproj" 프로젝트(Build 대상)입니다.
+﻿Build started 2015-04-16 오후 5:41:19.
+     1>Project "C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\xh2pdf\xh2pdf.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt xh2pdf.cpp
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\xh2pdf.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Dictionary.cpp Font.cpp Header.cpp HwpXmlInflation.cpp Object.cpp ProducePdf.cpp Image.cpp Stream.cpp tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp Trailer.cpp xh2pdf.cpp XrefTable.cpp
+         XrefTable.cpp
          xh2pdf.cpp
-     1>c:\users\atsu\documents\visual studio 2013\projects\xh2pdf\xh2pdf\xh2pdf.cpp(42): warning C4101: 'isFileRight' :참조되지 않은 지역 변수입니다.
+         Trailer.cpp
+         tinyxmlparser.cpp
+         tinyxmlerror.cpp
+         tinyxml.cpp
+         tinystr.cpp
+         Stream.cpp
+         Image.cpp
+         ProducePdf.cpp
+     1>c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\producepdf.cpp(636): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
+     1>c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\producepdf.cpp(773): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
+         Object.cpp
+         HwpXmlInflation.cpp
+         Header.cpp
+         Font.cpp
+         Dictionary.cpp
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\Debug\xh2pdf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\Debug\xh2pdf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\Debug\xh2pdf.lib" /MACHINE:X86 Debug\Pdf.obj
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\Debug\xh2pdf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\Debug\xh2pdf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\Debug\xh2pdf.lib" /MACHINE:X86 Debug\Dictionary.obj
+         Debug\Font.obj
+         Debug\Header.obj
+         Debug\HwpXmlInflation.obj
+         Debug\Object.obj
          Debug\ProducePdf.obj
          Debug\stdafx.obj
+         Debug\Image.obj
+         Debug\Stream.obj
          Debug\tinystr.obj
          Debug\tinyxml.obj
          Debug\tinyxmlerror.obj
          Debug\tinyxmlparser.obj
+         Debug\Trailer.obj
          Debug\xh2pdf.obj
-         xh2pdf.vcxproj -> C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\Debug\xh2pdf.exe
-     1>"C:\Users\atsu\documents\visual studio 2013\Projects\xh2pdf\xh2pdf\xh2pdf.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+         Debug\XrefTable.obj
+         xh2pdf.vcxproj -> C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\Debug\xh2pdf.exe
+     1>Done Building Project "C:\Users\USER\Documents\Visual Studio 2013\Projects\hwp2pdf\xh2pdf\xh2pdf.vcxproj" (Build target(s)).
 
-빌드했습니다.
+Build succeeded.
 
-경과 시간: 00:00:04.13
+Time Elapsed 00:00:05.98

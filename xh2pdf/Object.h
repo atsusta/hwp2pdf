@@ -1,6 +1,6 @@
 #pragma once
-#define MAXSIZE 256
 
+#include <string>
 using namespace std;
 
 /** 
@@ -51,12 +51,12 @@ template <typename T> int counter<T>::objects_alive(0);
 /**
  * Class : Object
  * Description : 'object' means PDF OBJECT.
- * This represented as
- * 'n 0 obj ...(attribute code)... endobj'
- * in PDF code('n' is unsigned integer).
- * This is contained by subsystem 'File body'.
- * This is Primary super class for other objects.
- * This is an abstract class.
+ *  This is represented as
+ *  'n 0 obj ...(attribute code)... endobj'
+ *  in PDF code('n' is unsigned integer).
+ *  This is contained by subsystem 'File body'.
+ *  This is Primary super class for other objects.
+ *  This is an abstract class.
  */
 class Object : public counter<Object> {
 
@@ -64,7 +64,7 @@ public:
 	Object();
 	int getObjectNo();
 	string getCode();
-	void setObjectNumber(int num);
+	void setObjectNo(int num);
 	void setType(string type);
 
 	virtual void referenceObjectNo(int objectNo) = 0; 

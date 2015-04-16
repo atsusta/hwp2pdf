@@ -9,15 +9,54 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Class : Header, Catalog, Pages, Page, PrimaryFont, SubFont, FontDescriptor, 
+ *  xrefTable, Trailer
+ * Description : All member functions in Pdf structure classes
+ *
+ * Function Overrided :
+ *  void generateCode(string& target),
+ *  void referenceObjectNumber(int objectNum)
+ *
+ * Description :
+ *  Implementations of Functions that generate Pdf structure code
+ *
+ * Parameters :
+ *  stringstream& target - the target stream of string for Pdf structure code,
+ *  int objectNum - the number of object that is referenced by
+ *  Return Value : none
+ *
+ * Revisions :
+ *  1. When : 140606
+ *   What : getnerateCode(string& target) argument changed to string* ... failed.
+ *   If so, "target << " code is unavailable
+ *   because << operator need to be additionally overloaded!! ( POINTER << VARIABLE )
+ *  
+ *  2. When : 140607
+ *   What : implementation error correction
+ *   two functions must be implemented by all derived subclasses.
+ *  
+ *  3. When : 140616
+ *   What : stringstream type inspection
+ *   runtime-error cannot be conquered...
+ *  
+ *  4. When : 140705
+ *   What : changed generateCode()
+ *   using string variable
+ *   added function string.append() and string.push_back()
+ *  
+ *  5. When : 140803
+ *   What : ProducePdf()
+ *   use case realization
+ */
+
 ProducePdf::ProducePdf()
 {
 }
 
-
 ProducePdf::~ProducePdf()
 {
 }
-
 
 // Function : getPageContentInformation
 // Description : for use case 'Get page content information'
@@ -41,10 +80,10 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 	}
 
 	// Page number, size, and orientation setting ready
-	vector<PageSize>& tempPageSizes = bodyTextInfo.getPageSizes();
+	vector<PageSize>& documentPageSizes = bodyTextInfo.getPageSizes();
 
 	// Get reference of lineSegs in BodyText object
-	vector<LineSeg>& tempLineSegs = bodyTextInfo.getLineSegs();
+	vector<LineSeg>& documentLineSegs = bodyTextInfo.getLineSegs();
 
 	// Image file to byte array
 	char* imageFileToByteArray = NULL;
@@ -104,7 +143,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 					// PAGE SCOPE : page size setting
 					{
 						// Page orientation alternation (/MediaBox in PDF)
-						PageSize tempPageSize;
+						PageSize pageSize;
 
 						bool isPortrait = !memcmp(pChild->Attribute("orientation"), "portrait", sizeof("portrait"));
 						if (isPortrait)
@@ -112,7 +151,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 							// Portrait orientation
 							mbox2 = (double)atoi(pChild->Attribute("width"));
 							mbox3 = (double)atoi(pChild->Attribute("height"));
-							tempPageSize.setMbox(mbox0, mbox1, mbox2 / 100.0, mbox3 / 100.0);
+							pageSize.setMbox(mbox0, mbox1, mbox2 / 100.0, mbox3 / 100.0);
 							cout << "MediaBox : " << mbox0 << " " << mbox1 << " " << mbox2 << 
 								" " << mbox3 << endl;
 						}
@@ -121,12 +160,12 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 							// Landscape orientation
 							mbox2 = (double)atoi(pChild->Attribute("height"));
 							mbox3 = (double)atoi(pChild->Attribute("width"));
-							tempPageSize.setMbox(mbox0, mbox1, mbox2 / 100.0, mbox3 / 100.0);
+							pageSize.setMbox(mbox0, mbox1, mbox2 / 100.0, mbox3 / 100.0);
 						}
 
 						// Page1 - first element, page2 - second element, ...
-						tempPageSizes.push_back(tempPageSize);
-						tempPageSize.setAppliedPageNo(bodyTextInfo.getPageNo());
+						documentPageSizes.push_back(pageSize);
+						pageSize.setAppliedPageNo(bodyTextInfo.getPageNo());
 					} // end PAGE SCOPE
 
 					// PARAGRAPH SCOPE : page margin analyze (/Tm in PDF)
@@ -164,7 +203,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 						bool hasLineSeg = !memcmp(pChild1->Value(), "LineSeg", sizeof("LineSeg"));
 						if (hasLineSeg)
 						{
-							LineSeg tempLineSeg;
+							LineSeg aLineSeg;
 
 							// Tm setting - font size (e.g. 10 0 0 10 566.9 785.19 matrix)
 							tm0 = (double) atoi(pChild1->Attribute("height2"));
@@ -174,7 +213,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 								tm1 << " " << tm2 << " " << tm3 << " " << 
 								tm4 << " " << tm5 << endl;
 
-							tempLineSeg.setTm(tm0 / 100.0, tm1 / 100.0, 
+							aLineSeg.setTm(tm0 / 100.0, tm1 / 100.0, 
 								tm2 / 100.0, tm3 / 100.0, 
 								tm4 / 100.0, tm5 / 100.0);
 
@@ -188,25 +227,25 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 								bodyTextInfo.setNextPage();
 
 								// Each paragraph has page number
-								tempLineSeg.setPageNo(bodyTextInfo.getPageNo());
+								aLineSeg.setPageNo(bodyTextInfo.getPageNo());
 							}
 							else 
 							{ 
 								// Next y postion is smaller than previous y position -> next page
-								tempLineSeg.setPageNo(bodyTextInfo.getPageNo());
+								aLineSeg.setPageNo(bodyTextInfo.getPageNo());
 							}
 
 							// Td setting for line height and indentation
 							td0 = lineSegX / 1000.0;
 							td1 = (downerLineSegY / 1000.0) * (1000.0 / tm0);
-							tempLineSeg.setTd(td0, td1);
+							aLineSeg.setTd(td0, td1);
 
 							upperLineSegY = downerLineSegY;
 
 							// Font setting (temporary preference)
 							// In this version all PDF documents 
 							// has the font Nanum Gothic Coding only...
-							tempLineSeg.setFont("NanumGothicCoding");
+							aLineSeg.setFont("NanumGothicCoding");
 
 							// Text(string) setting
 							string strAnsi = "";
@@ -254,14 +293,18 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 
 										//cout << strMultibyte << endl;
 
-										//tempLineSeg.setSeg(strMultibyte);
-										//tempLineSegs.push_back(tempLineSeg); // each paragraph has line one or more segments
+										//aLineSeg.setSeg(strMultibyte);
+										//aLineSegs.push_back(aLineSeg); // each paragraph has line one or more segments
 
 
 										// 2. UTF8Conv macro functions
 										UTF8_CONVERSION;
-										strAnsi = UTF82A(strUtf8); // ANSI string for console display
-										wstring strUnicodeSegment = UTF82W(strUtf8); // UNICODE string for pdf code generating
+
+										// ANSI string for console display
+										strAnsi = UTF82A(strUtf8);
+
+										// UNICODE string for pdf code generating
+										wstring strUnicodeSegment = UTF82W(strUtf8);
 										
 										// Unit test
 										cout << strAnsi;
@@ -275,13 +318,19 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 								{
 									// When document has an image object
 									//imageFileToByteArray = readFileBytes(imageFileName);
-									//tempImages.push_back(imageFileToByteArray);
+									//aImages.push_back(imageFileToByteArray);
 									//cout << "image file test" << endl;
 								}
 							} // End text(string) setting
-							tempLineSeg.setSeg(strUnicode); // set line segment (TJ element)
-							tempLineSeg.setLength(sizeof(strUnicode)); // set line segment length for xrefTable
-							tempLineSegs.push_back(tempLineSeg);
+
+							// Set line segment content (TJ element in PDF)
+							aLineSeg.setSeg(strUnicode);
+
+							// Set line segment length for xrefTable
+							aLineSeg.setLength(sizeof(strUnicode));
+							
+							// Add to whole LineSeg collection
+							documentLineSegs.push_back(aLineSeg);
 						} // End <LineSeg> setting (depth 3)
 					}
 				} // End <PageDef>, <Paragraph> (depth 2)
@@ -301,45 +350,44 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 		// Verify page number in paragraph included in bodyText.xml
 		// and allocate data to paragraph included in PDF text object.
 		Text aText;
-		aText.setObjectNumber(counter<Object>::objects_alive);
+		aText.setObjectNo(counter<Object>::objects_alive);
 
 		// Get line segment collection in text object
-		vector<LineSeg>& tempInPageLineSegs = aText.getInPageLineSegs();
+		vector<LineSeg>& textLineSegs = aText.getLineSegs();
 
-		for (unsigned int j = 1; j <= tempLineSegs.size(); j++)
+		for (unsigned int j = 1; j <= documentLineSegs.size(); j++)
 		{
-			if (tempLineSegs[j - 1].getPageNo() == i)
+			if (documentLineSegs[j - 1].getPageNo() == i)
 			{
 				// When page number between text object and exposed line segment matches
 				// copy line segment content to text object
-				tempInPageLineSegs.push_back(tempLineSegs[j - 1]);
+				textLineSegs.push_back(documentLineSegs[j - 1]);
 			}
 		}
 
 		// Analize what fonts the text object have.
-		// InPageParagraph & InPageFont
 		// The Font name must be identical.
-		vector<string> inPageFonts;
+		vector<string> pageScopeFonts;
 		size_t textLength = 0;
 
-		for (vector<LineSeg>::iterator IterPos = tempInPageLineSegs.begin();
-			IterPos != tempInPageLineSegs.end();
-			++IterPos)
+		for (vector<LineSeg>::iterator i = textLineSegs.begin();
+			i != textLineSegs.end();
+			++i)
 		{
 			// Count up fonts
-			inPageFonts.push_back(IterPos->getFont());
-			textLength += IterPos->getLength();
+			pageScopeFonts.push_back(i->getFont());
+			textLength += i->getLength();
 		}
 
 		// Set text length for cross reference table
 		aText.setLength(textLength);
 
 		// Count number of fonts as unique
-		vector<string>::iterator it;
-		it = unique(inPageFonts.begin(), inPageFonts.end());
-		inPageFonts.resize(distance(inPageFonts.begin(), it));
+		vector<string>::iterator i;
+		i = unique(pageScopeFonts.begin(), pageScopeFonts.end());
+		pageScopeFonts.resize(distance(pageScopeFonts.begin(), i));
 
-		for (unsigned int i = 1; i <= inPageFonts.size(); i++) {
+		for (unsigned int i = 1; i <= pageScopeFonts.size(); i++) {
 			// Used Resource(font number) setting 
 			// Represented in PDF as '/F1 /F2 /F3 /F4 ...'
 			aText.setFontNumber(i);
@@ -348,52 +396,48 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 		texts.push_back(aText);
 
 		// Count up all the fonts in document
-		for (vector<string>::iterator dfIterPos = inPageFonts.begin();
-			dfIterPos != inPageFonts.end();
-			++dfIterPos)
+		for (vector<string>::iterator i = pageScopeFonts.begin();
+			i != pageScopeFonts.end();
+			++i)
 		{
-			documentFonts.push_back(*dfIterPos);
+			documentFonts.push_back(*i);
 
 			// Count number of fonts as unique
-			vector<string>::iterator documentIt;
-			documentIt = unique(documentFonts.begin(), documentFonts.end());
+			vector<string>::iterator j;
+			j = unique(documentFonts.begin(), documentFonts.end());
 			
 			// Resize collection
-			documentFonts.resize(distance(documentFonts.begin(), documentIt));
+			documentFonts.resize(distance(documentFonts.begin(), j));
 		}
 	}
 
 	/* Initialize new pdf objects */
 	cout << "Initialize new pdf objects" << endl;
 
-	initializeNewPdfObject(bodyTextInfo, tempPageSizes, documentFonts, texts, outputFileName, pdfCode);
+	initializeNewPdfObject(bodyTextInfo, documentPageSizes, documentFonts, texts, outputFileName, pdfCode);
 	return true;
 
 }
 
-
 // Fuction : InitializeNewPdfObject
 // Description : for use case 'Initialize new PDF objects'
 void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo, 
-	vector<PageSize>& tempPageSizes, 
-	vector<string> documentFonts, 
-	vector<Text> texts, 
-	char* outputFileName, 
-	ofstream& pdfCode)
+	vector<PageSize>& tempPageSizes, vector<string> documentFonts, 
+	vector<Text> texts, char* outputFileName, ofstream& pdfCode)
 {
-	// File header
+	// Initialize File header
 	Header header;
 	header.setPdfVersion("%PDF-1.7");
 
-	// Catalog looks parent page
+	// Initialize Catalog looks parent page
 	Catalog catalog;
-	catalog.setObjectNumber(counter<Object>::objects_alive);
+	catalog.setObjectNo(counter<Object>::objects_alive);
 
-	// Root of page collection
+	// Initialize Root of page collection
 	Pages parentPage;
-	parentPage.setObjectNumber(counter<Object>::objects_alive);
+	parentPage.setObjectNo(counter<Object>::objects_alive);
 
-	// Multiple pages
+	// Initialize Multiple pages
 	vector<Page> pages;
 
 	unsigned int pageIndex = 0;
@@ -401,7 +445,7 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 	{
 		// Page object - set object number int PDF code
 		Page aPage;
-		aPage.setObjectNumber(counter<Object>::objects_alive);
+		aPage.setObjectNo(counter<Object>::objects_alive);
 		aPage.referenceObjectNo(parentPage.getObjectNo());
 
 		// Set mediabox
@@ -436,7 +480,8 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 				tempPageSizes[pageIndex].getMbox3()
 				);
 		}
-		// push page to collection
+
+		// Add page object to collection
 		pages.push_back(aPage);
 	}
 
@@ -445,40 +490,40 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 	vector<SubFont> subFonts;
 	vector<FontDescriptor> fontDescriptors;
 
-	for (vector<string>::iterator fIterPos = documentFonts.begin();
-		fIterPos != documentFonts.end();
-		++fIterPos)
+	for (vector<string>::iterator i = documentFonts.begin();
+		i != documentFonts.end();
+		++i)
 	{
 		// Font saving in whole document scope
 		// Set primary font
 		PrimaryFont aFont;
-		aFont.setObjectNumber(counter<Object>::objects_alive);
+		aFont.setObjectNo(counter<Object>::objects_alive);
 
-		if (!fIterPos->compare("NanumGothicCoding"))
+		if (!i->compare("NanumGothicCoding"))
 		{
-			// When meets font Nanum Gothic Coding
-			// Set subfont and font descriptor
+			// When meets font Nanum Gothic Coding, set subfont and font descriptor
 			SubFont aSubfont;
-			aSubfont.setObjectNumber(counter<Object>::objects_alive);
+			aSubfont.setObjectNo(counter<Object>::objects_alive);
 			FontDescriptor aFontDescriptor;
-			aFontDescriptor.setObjectNumber(counter<Object>::objects_alive);
+			aFontDescriptor.setObjectNo(counter<Object>::objects_alive);
 
 			aFont.setSubtype("/Type0");
-			aFont.setBaseFont(fIterPos->data());
+			aFont.setBaseFont(i->data());
 			aFont.setEncoding("/UniKS-UCS2-H");
 
 			aSubfont.setSubtype("/CIDFontType2");
-			aSubfont.setBaseFont(fIterPos->data());
+			aSubfont.setBaseFont(i->data());
 			//aSubfont.setFontDescriptor("")
 			aSubfont.setW(0, 95, 500);
 			aSubfont.setDw(1000);
-			aSubfont.setCidSystemInfo("<<\n/Supplement 1\n/Ordering(Korea1)\n/Registry(Adobe)\n>>");
+			aSubfont.setCidSystemInfo(
+				"<<\n/Supplement 1\n/Ordering(Korea1)\n/Registry(Adobe)\n>>");
 
 			// Primary font refereneces descendant fonts
 			aFont.referenceObjectNo(aSubfont.getObjectNo());
 
-			aFontDescriptor.setFontName(fIterPos->data());
-			aFontDescriptor.setFontFamily(fIterPos->data());
+			aFontDescriptor.setFontName(i->data());
+			aFontDescriptor.setFontFamily(i->data());
 			aFontDescriptor.setFlags(34);
 			aFontDescriptor.setFontBBox(0, -200, 1000, 801);
 			aFontDescriptor.setItalicAngle(0);
@@ -490,47 +535,51 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 			aFontDescriptor.setFontStretch("/Normal");
 			aFontDescriptor.setFontWeight(400);
 			aFontDescriptor.setXHeight(458);
-			aSubfont.referenceObjectNo(aFontDescriptor.getObjectNo()); // subfont references font descriptor
 
-			// save CID subfont and font descriptor to each collection class
+			// Subfont references font descriptor
+			aSubfont.referenceObjectNo(aFontDescriptor.getObjectNo());
+
+			// Save CID subfont and font descriptor to each collection class
 			subFonts.push_back(aSubfont);
 			fontDescriptors.push_back(aFontDescriptor);
 		}
-		else if (!fIterPos->compare("TimesNewRoman"))
+		else if (!i->compare("TimesNewRoman"))
 		{
-			// if there isn't first font for english, add font Times New Roman.
+			// If there isn't first font for english, add font Times New Roman.
 			aFont.setSubtype("Type1");
-			aFont.setBaseFont(fIterPos->data());
+			aFont.setBaseFont(i->data());
 		}
 
-		// save primary font
+		// Save the primary font
 		primaryFonts.push_back(aFont);
 	}
-
+	
+	cout << "// Catalog looks at parentPage" << endl;
 	// Catalog looks at parentPage
 	catalog.referenceObjectNo(parentPage.getObjectNo());
 
 	// Multiple pages and parent page
 	// Page and font reference setting
-	for (vector<Page>::iterator pIterPos = pages.begin();
-		pIterPos != pages.end();
-		++pIterPos)
+	for (vector<Page>::iterator i = pages.begin();
+		i != pages.end();
+		++i)
 	{
 		// Child page reference setting in Parent page
 		// Represented as 'Kids [ x 0 R y 0 R z 0 R ... ]'
-		parentPage.referenceObjectNo(pIterPos->getObjectNo());
-		pIterPos->referenceObjectNo(parentPage.getObjectNo());
+		parentPage.referenceObjectNo(i->getObjectNo());
+		i->referenceObjectNo(parentPage.getObjectNo());
 		parentPage.setCount();
 
 		// Primary font reference setting in child page
-		for (vector<PrimaryFont>::iterator fIterPos = primaryFonts.begin();
-			fIterPos != primaryFonts.end();
-			++fIterPos)
+		for (vector<PrimaryFont>::iterator j = primaryFonts.begin();
+			j != primaryFonts.end();
+			++j)
 		{
-			pIterPos->setResources(fIterPos->getObjectNo());
+			i->setResources(j->getObjectNo());
 		}
 	}
 
+	cout << "// Initialize Cross reference table" << endl;
 	// Initialize Cross reference table
 	XrefTable xrefTable;
 
@@ -594,25 +643,26 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 	pdfCode.close();
 }
 
-
 // Fuction : connectPageContentToPage
 // Description : for use case 'Connect page content to page'
 void ProducePdf::connectPageContentToPage(vector<Text>& texts, 
 	vector<Page>& pages)
 {
-	vector<Text>::iterator tIterPos = texts.begin();
-	vector<Page>::iterator pIterPos = pages.begin();
+	vector<Text>::iterator i = texts.begin();
+	vector<Page>::iterator j = pages.begin();
 
-	while ((tIterPos != texts.end()) && (pIterPos != pages.end()))
+	while ((i != texts.end()) && (j != pages.end()))
 	{
-		pIterPos->setContents(tIterPos->getObjectNo());
-		tIterPos++;
-		pIterPos++;
+		// Connect content in text(LineSegs) to page
+		j->setContents(i->getObjectNo());
+
+		// Go to next content
+		i++;
+		j++;
 	}
 }
 
-
-// Function : generateANewPdfCode
+// Function : generateNewPdfCode
 // Description : for use case 'Generate a new pdf code'
 void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	Pages& parentPage, vector<Page>& pages,	vector<PrimaryFont>& primaryFonts,
@@ -622,84 +672,100 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 {
 	cout << "\nCross reference table element setting start..." << endl;
 
-	// 1. File header
+	// 1. File header code generating
 	pdfCode << header.generateCode();
-	string tempCode = header.getCode();
-	xrefTable.setOffset(0, tempCode.size());
 
-	// 2. Catalog (root)
+	// Byte offset measuring
+	string code = header.getCode();
+	xrefTable.setOffset(0, code.size());
+
+	// 2. Catalog (root) code generating
 	pdfCode << catalog.generateCode();
-	tempCode = catalog.getCode();	// code byte measuring
-	xrefTable.setOffset(catalog.getObjectNo(), tempCode.size());
+	
+	// Byte offset measuring
+	code = catalog.getCode();
+	xrefTable.setOffset(catalog.getObjectNo(), code.size());
 
-	// 3. Parent page (pages)
+	// 3. Parent page (Pages) code generating
 	pdfCode << parentPage.generateCode();
-	tempCode.clear();	// code byte measuring
-	tempCode = parentPage.getCode();
-	xrefTable.setOffset(parentPage.getObjectNo(), tempCode.size());
+	
+	// Byte offset measuring
+	code.clear();
+	code = parentPage.getCode();
+	xrefTable.setOffset(parentPage.getObjectNo(), code.size());
 
-	// 4. Child pages (page)
-	for (vector<Page>::iterator pIterPos = pages.begin();
-		pIterPos != pages.end();
-		++pIterPos)
+	// 4. Child pages (Page) code generating
+	for (vector<Page>::iterator i = pages.begin();
+		i != pages.end();
+		++i)
 	{
-		pdfCode << pIterPos->generateCode();
-		tempCode.clear();	// code byte measuring
-		tempCode = pIterPos->getCode();
-		xrefTable.setOffset(pIterPos->getObjectNo(), tempCode.size());
+		pdfCode << i->generateCode();
+
+		// Byte offset measuring
+		code.clear();
+		code = i->getCode();
+		xrefTable.setOffset(i->getObjectNo(), code.size());
 	}
 
-	// 5. Font (primary font)
-	for (vector<PrimaryFont>::iterator fIterPos = primaryFonts.begin();
-		fIterPos != primaryFonts.end();
-		++fIterPos)
+	// 5. Font (PrimaryFont) code generating
+	for (vector<PrimaryFont>::iterator i = primaryFonts.begin();
+		i != primaryFonts.end();
+		++i)
 	{
-		pdfCode << fIterPos->generateCode();
-		tempCode.clear();	// code byte measuring
-		tempCode = fIterPos->getCode();
-		xrefTable.setOffset(fIterPos->getObjectNo(), tempCode.size());
+		pdfCode << i->generateCode();
+		
+		// Byte offset measuring
+		code.clear();
+		code = i->getCode();
+		xrefTable.setOffset(i->getObjectNo(), code.size());
 	}
 
-	// 6. Text stream
+	// 6. Text stream code generating
 	// UniKS-UCS2-H Adobe Korea1-1
-	for (vector<Text>::iterator tIterPos = texts.begin();
-		tIterPos != texts.end();
-		++tIterPos)
+	for (vector<Text>::iterator i = texts.begin();
+		i != texts.end();
+		++i)
 	{
-		pdfCode << tIterPos->generateCode();
-		tempCode.clear();	// code byte measuring
-		tempCode = tIterPos->getCode();
-		xrefTable.setOffset(tIterPos->getObjectNo(), tempCode.size());
+		pdfCode << i->generateCode();
+
+		// Byte offset measuring
+		code.clear();
+		code = i->getCode();
+		xrefTable.setOffset(i->getObjectNo(), code.size());
 	}
 
-	// 7. Subfont (descendant font)
-	for (vector<SubFont>::iterator sfIterPos = subFonts.begin();
-		sfIterPos != subFonts.end();
-		++sfIterPos)
+	// 7. Subfont (descendant font) code generating
+	for (vector<SubFont>::iterator i = subFonts.begin();
+		i != subFonts.end();
+		++i)
 	{
-		pdfCode << sfIterPos->generateCode();
-		tempCode.clear();	// code byte measuring
-		tempCode = sfIterPos->getCode();
-		xrefTable.setOffset(sfIterPos->getObjectNo(), tempCode.size());
+		pdfCode << i->generateCode();
+
+		// Byte offset measuring
+		code.clear();
+		code = i->getCode();
+		xrefTable.setOffset(i->getObjectNo(), code.size());
 	}
 
-	// 8. Font descriptor
-	for (vector<FontDescriptor>::iterator fdIterPos = fontDescriptors.begin();
-		fdIterPos != fontDescriptors.end();
-		++fdIterPos)
+	// 8. Font descriptor code generating
+	for (vector<FontDescriptor>::iterator i = fontDescriptors.begin();
+		i != fontDescriptors.end();
+		++i)
 	{
-		pdfCode << fdIterPos->generateCode();
-		tempCode.clear();	// code byte measuring
-		tempCode = fdIterPos->getCode();
-		xrefTable.setOffset(fdIterPos->getObjectNo(), tempCode.size());
+		pdfCode << i->generateCode();
+		
+		// Byte offset measuring
+		code.clear();
+		code = i->getCode();
+		xrefTable.setOffset(i->getObjectNo(), code.size());
 	}
 
-	// 9. Cross reference table
+	// 9. Cross reference table code generating
 	pdfCode << xrefTable.generateCode();
-	vector<std::pair<int, size_t>>& tempOffsets = xrefTable.getOffsets();
+	vector<std::pair<int, size_t>>& offsets = xrefTable.getOffsets();
 
-	// 10. Trailer
-	pdfCode << trailer.generateCode(tempOffsets.back().second);
+	// 10. Trailer code generating
+	pdfCode << trailer.generateCode(offsets.back().second);
 }
 
 // Function : readFileBytes

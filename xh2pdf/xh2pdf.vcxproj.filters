@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\tinyXML">
-      <UniqueIdentifier>{2af1141c-5947-43d5-a9b5-ff939057cf89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Cross Reference Table">
       <UniqueIdentifier>{cc167b8e-46a9-4da2-a23e-67b00f59af95}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,24 @@
     </Filter>
     <Filter Include="헤더 파일\Libraries\tinyXML">
       <UniqueIdentifier>{f1501115-d3f1-455d-ab0b-d0890a9f2de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Cross Reference Table">
+      <UniqueIdentifier>{d9de4445-1c44-4b76-8e83-024a465916dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\File Body">
+      <UniqueIdentifier>{d842bf17-143b-441e-8300-fc4b8052b120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\File Header">
+      <UniqueIdentifier>{dd54e249-ad2b-4945-a3f7-2dc33f52aefd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\File Trailer">
+      <UniqueIdentifier>{cc97b9f2-ab86-4af9-b7d9-6fe62ce24a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Libraries">
+      <UniqueIdentifier>{ae60eee0-a3cd-4267-9e59-b37c2e907079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Libraries\tinyXML">
+      <UniqueIdentifier>{2af1141c-5947-43d5-a9b5-ff939057cf89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +99,6 @@
     <ClInclude Include="UTF8Conv.h">
       <Filter>헤더 파일\Libraries</Filter>
     </ClInclude>
-    <ClInclude Include="PageSize.h">
-      <Filter>헤더 파일\File Body</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -95,23 +107,47 @@
     <ClCompile Include="xh2pdf.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Pdf.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ProducePdf.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="tinystr.cpp">
-      <Filter>소스 파일\tinyXML</Filter>
+      <Filter>소스 파일\Libraries\tinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyxml.cpp">
-      <Filter>소스 파일\tinyXML</Filter>
+      <Filter>소스 파일\Libraries\tinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyxmlerror.cpp">
-      <Filter>소스 파일\tinyXML</Filter>
+      <Filter>소스 파일\Libraries\tinyXML</Filter>
     </ClCompile>
     <ClCompile Include="tinyxmlparser.cpp">
-      <Filter>소스 파일\tinyXML</Filter>
+      <Filter>소스 파일\Libraries\tinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="HwpXmlInflation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Dictionary.cpp">
+      <Filter>소스 파일\File Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>소스 파일\File Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>소스 파일\File Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>소스 파일\File Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\File Body</Filter>
+    </ClCompile>
+    <ClCompile Include="XrefTable.cpp">
+      <Filter>소스 파일\Cross Reference Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Trailer.cpp">
+      <Filter>소스 파일\File Trailer</Filter>
+    </ClCompile>
+    <ClCompile Include="Header.cpp">
+      <Filter>소스 파일\File Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

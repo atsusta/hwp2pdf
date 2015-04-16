@@ -83,7 +83,6 @@
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="PageSize.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="ProducePdf.h" />
@@ -97,17 +96,25 @@
     <ClInclude Include="XrefTable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Pdf.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Header.cpp" />
+    <ClCompile Include="HwpXmlInflation.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProducePdf.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Stream.cpp" />
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />
     <ClCompile Include="tinyxmlerror.cpp" />
     <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="Trailer.cpp" />
     <ClCompile Include="xh2pdf.cpp" />
+    <ClCompile Include="XrefTable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
