@@ -20,9 +20,31 @@ c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xreftab
 c:\users\user\documents\visual studio 2013\projects\hwp2pdf\debug\xh2pdf.ilk
 c:\users\user\documents\visual studio 2013\projects\hwp2pdf\debug\xh2pdf.exe
 c:\users\user\documents\visual studio 2013\projects\hwp2pdf\debug\xh2pdf.pdb
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.command.1.tlog
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.read.1.tlog
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.write.1.tlog
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.command.1.tlog
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.read.1.tlog
-c:\users\user\documents\visual studio 2013\projects\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.write.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\dictionary.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\font.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\header.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\hwpxmlinflation.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\image.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\object.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\producepdf.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\stdafx.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\stream.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\tinystr.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\tinyxml.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\tinyxmlerror.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\tinyxmlparser.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\trailer.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\xreftable.obj
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.pch
+d:\dev\github\hwp2pdf\xh2pdf\debug\vc120.idb
+d:\dev\github\hwp2pdf\xh2pdf\debug\vc120.pdb
+d:\dev\github\hwp2pdf\debug\xh2pdf.pdb
+d:\dev\github\hwp2pdf\debug\xh2pdf.exe
+d:\dev\github\hwp2pdf\debug\xh2pdf.ilk
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.command.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.read.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\cl.write.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.command.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.read.1.tlog
+d:\dev\github\hwp2pdf\xh2pdf\debug\xh2pdf.tlog\link.write.1.tlog

@@ -171,7 +171,8 @@ string Page::generateCode()
 			this->code.append("<<");
 				this->code.push_back('\n');
 
-				int i = 1;
+				// Font number should be started from 1
+				int fontNo = 1;
 
 				// Font resource collection has object number for font object
 				for (vector<int>::iterator i = fontResources.begin();
@@ -179,15 +180,18 @@ string Page::generateCode()
 					++i)
 				{
 					this->code.append("\t\t");
-
+					
 					// Identical font
 					this->code.append("/F");
-					this->code.append(to_string(*i));
+					this->code.append(to_string(fontNo));
 					this->code.push_back(' ');
 
 					this->code.append(to_string(*i));
 					this->code.append(" 0 R");
 					this->code.push_back('\n');
+
+					// Set next font number
+					fontNo++;
 				}
 
 				this->code.append("\t");
