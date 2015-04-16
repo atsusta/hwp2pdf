@@ -13,11 +13,26 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="헤더 파일\tinyXML">
-      <UniqueIdentifier>{f1501115-d3f1-455d-ab0b-d0890a9f2de7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\tinyXML">
       <UniqueIdentifier>{2af1141c-5947-43d5-a9b5-ff939057cf89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Cross Reference Table">
+      <UniqueIdentifier>{cc167b8e-46a9-4da2-a23e-67b00f59af95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\File Header">
+      <UniqueIdentifier>{787932da-a5d5-437b-96c9-4119c74387e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\File Body">
+      <UniqueIdentifier>{2a340896-dcee-46ad-b870-25ce30019da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\File Trailer">
+      <UniqueIdentifier>{41c02d81-27a4-4eeb-9434-0cb3fe1e1cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Libraries">
+      <UniqueIdentifier>{24eb2f45-e9ce-4624-8e58-7dcd9d554cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Libraries\tinyXML">
+      <UniqueIdentifier>{f1501115-d3f1-455d-ab0b-d0890a9f2de7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,20 +45,47 @@
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Pdf.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ProducePdf.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="UTF8Conv.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="tinyxml.h">
-      <Filter>헤더 파일\tinyXML</Filter>
+      <Filter>헤더 파일\Libraries\tinyXML</Filter>
     </ClInclude>
     <ClInclude Include="tinystr.h">
-      <Filter>헤더 파일\tinyXML</Filter>
+      <Filter>헤더 파일\Libraries\tinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="HwpXmlInflation.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>헤더 파일\File Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>헤더 파일\File Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>헤더 파일\File Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>헤더 파일\File Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>헤더 파일\File Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>헤더 파일\File Body</Filter>
+    </ClInclude>
+    <ClInclude Include="XrefTable.h">
+      <Filter>헤더 파일\Cross Reference Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Trailer.h">
+      <Filter>헤더 파일\File Trailer</Filter>
+    </ClInclude>
+    <ClInclude Include="UTF8Conv.h">
+      <Filter>헤더 파일\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="PageSize.h">
+      <Filter>헤더 파일\File Body</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -79,13 +79,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pdf.h" />
+    <ClInclude Include="HwpXmlInflation.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="PageSize.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="ProducePdf.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Stream.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tinystr.h" />
     <ClInclude Include="tinyxml.h" />
+    <ClInclude Include="Trailer.h" />
     <ClInclude Include="UTF8Conv.h" />
+    <ClInclude Include="XrefTable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pdf.cpp" />

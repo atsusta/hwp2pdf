@@ -32,6 +32,14 @@ using namespace std;
 // What : ProducePdf()
 // use case realization 
 
+Stream::Stream()
+{
+	length = 0;
+	subtype = "";
+	stream = "";
+}
+
+
 // Class : LineSeg
 // Description : Line segment information archive from XML file
 LineSeg::LineSeg()

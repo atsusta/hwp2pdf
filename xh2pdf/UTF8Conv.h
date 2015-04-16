@@ -35,7 +35,7 @@
 #pragma once
 #include <malloc.h>
 #include <vector>
-
+#include <windows.h>
 
 template <typename Ty>
 class _SafeAllocator
