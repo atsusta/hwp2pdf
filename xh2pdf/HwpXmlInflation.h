@@ -28,7 +28,8 @@ public:
 	size_t getLength();
 	unsigned int getPageNo();
 	void setTd(double td0, double td1);
-	void setTm(double tm0, double tm1, double tm2, double tm3, double tm4, double tm5);
+	void setTm(double tm0, double tm1, double tm2, double tm3, double tm4, 
+		double tm5);
 	void setSeg(wstring seg);
 	void setFont(string fontName);
 	void setLength(size_t length);

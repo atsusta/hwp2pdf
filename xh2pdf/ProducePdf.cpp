@@ -11,7 +11,7 @@ using namespace std;
 
 /**
  * Class : Header, Catalog, Pages, Page, PrimaryFont, SubFont, FontDescriptor, 
- *  xrefTable, Trailer
+ *  crossReferenceTable, Trailer
  * Description : All member functions in Pdf structure classes
  *
  * Function Overrided :
@@ -95,7 +95,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 	{
 		if (pElem)
 		{
-			// New SectionDef : new page orientation
+			// Find new <SectionDef> tag : new page orientation
 			bodyTextInfo.setNextPage();
 
 			// Tabstop setting
@@ -103,7 +103,8 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 			bodyTextInfo.setDefaultTabStops(defaultTabStops);
 
 			// Depth 2 : 
-			// <PageDef>, <FootNoteShape>, <PageBorderFill>, <Paragraph> analysis
+			// <PageDef>, <FootNoteShape>, <PageBorderFill>, <Paragraph> tag analysis
+			// findPageContents(pElem, bodyTextInfo);
 			double mbox0 				= 0.0;
 			double mbox1 				= 0.0;
 			double mbox2 				= 0.0;
@@ -127,7 +128,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 			{
 				// Fetch each existing children
 				// (PageDef, FootnoteShpe, PageBorderFill, Paragraph)
-
+				// findPageInformations(pChild, bodyTextInfo)
 				bool hasPageDef = !memcmp(pChild->Value(), "PageDef", 
 					sizeof("PageDef"));
 				bool hasFootNoteShape = !memcmp(pChild->Value(), "FootNoteShape", 
@@ -139,8 +140,8 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 
 				if (hasPageDef)
 				{
-					// Analyze when <PageDef> exists,
-					// PAGE SCOPE : page size setting
+					// Find and analyze <PageDef> tags,
+					// Page size setting
 					{
 						// Page orientation alternation (/MediaBox in PDF)
 						PageSize pageSize;
@@ -189,17 +190,14 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 
 				else if (hasParagraph)
 				{
-					// <Paragraph> exists, analyze
-					// Paragraphs -1--owns--*- Paragraph
-					//									Paragraph -1--has--1- LineSegs
-					//														  LineSegs -1--owns--*- LineSeg
-
+					// Find and analyze <Paragraph> tags
+					// One <Paragraph> tag has many <LineSeg> tags
+					// findLineSegs(pChild, bodyTextInfo);
 					for (TiXmlElement* pChild1 = pChild->FirstChildElement();
 						pChild1;
-						pChild1 = pChild1->NextSiblingElement()) // fetch each children (LineSeg)
+						pChild1 = pChild1->NextSiblingElement())
 					{
-						// <LineSeg> analysis
-						// depth 3 : <LineSeg> setting
+						// Find and analyze <LineSeg> tags
 						bool hasLineSeg = !memcmp(pChild1->Value(), "LineSeg", sizeof("LineSeg"));
 						if (hasLineSeg)
 						{
@@ -209,13 +207,12 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 							tm0 = (double) atoi(pChild1->Attribute("height2"));
 							tm3 = (double) atoi(pChild1->Attribute("height"));
 
-							cout << "Text Matrix : \t" << tm0 << " " << 
-								tm1 << " " << tm2 << " " << tm3 << " " << 
-								tm4 << " " << tm5 << endl;
+							cout << "Text Matrix : \t" << tm0 << " " << tm1 << 
+								" " << tm2 << " " << tm3 << " " << tm4 << " " << 
+								tm5 << endl;
 
-							aLineSeg.setTm(tm0 / 100.0, tm1 / 100.0, 
-								tm2 / 100.0, tm3 / 100.0, 
-								tm4 / 100.0, tm5 / 100.0);
+							aLineSeg.setTm(tm0 / 100.0, tm1 / 100.0, tm2 / 100.0, 
+								tm3 / 100.0, tm4 / 100.0, tm5 / 100.0);
 
 							// Page number setting
 							lineSegX = atoi(pChild1->Attribute("x"));
@@ -243,9 +240,11 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 							upperLineSegY = downerLineSegY;
 
 							// Font setting (temporary preference)
-							// In this version all PDF documents 
+							// In this version, all PDF documents 
 							// has the font Nanum Gothic Coding only...
 							aLineSeg.setFont("NanumGothicCoding");
+
+							// findLineSegContents(aLineSeg, bodyTextInfo)
 
 							// Text(string) setting
 							string strAnsi = "";
@@ -326,7 +325,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 							// Set line segment content (TJ element in PDF)
 							aLineSeg.setSeg(strUnicode);
 
-							// Set line segment length for xrefTable
+							// Set line segment length for crossReferenceTable
 							aLineSeg.setLength(sizeof(strUnicode));
 							
 							// Add to whole LineSeg collection
@@ -581,7 +580,7 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 
 	cout << "// Initialize Cross reference table" << endl;
 	// Initialize Cross reference table
-	XrefTable xrefTable;
+	CrossReferenceTable crossReferenceTable;
 
 	// Initialize File Trailer 
 	Trailer trailer;
@@ -631,7 +630,7 @@ void ProducePdf::initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 
 	// Generate final PDF code
 	this->generateNewPdfCode(header, catalog, parentPage, pages, primaryFonts,
-		texts, subFonts, fontDescriptors, trailer, xrefTable, pdfCode);
+		texts, subFonts, fontDescriptors, trailer, crossReferenceTable, pdfCode);
 
 	// Move pointer to end of file
 	pdfCode.seekp(0, ios::end);
@@ -667,7 +666,7 @@ void ProducePdf::connectPageContentToPage(vector<Text>& texts,
 void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	Pages& parentPage, vector<Page>& pages,	vector<PrimaryFont>& primaryFonts,
 	vector<Text>& texts, vector<SubFont>& subFonts,
-	vector<FontDescriptor>& fontDescriptors, Trailer& trailer, XrefTable& xrefTable,
+	vector<FontDescriptor>& fontDescriptors, Trailer& trailer, CrossReferenceTable& crossReferenceTable,
 	ofstream& pdfCode)
 {
 	cout << "\nCross reference table element setting start..." << endl;
@@ -675,24 +674,24 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	// 1. File header code generating
 	pdfCode << header.generateCode();
 
-	// Byte offset measuring
+	// Byte offset measuring (Cross reference table generating)
 	string code = header.getCode();
-	xrefTable.setOffset(0, code.size());
+	crossReferenceTable.setOffset(0, code.size());
 
 	// 2. Catalog (root) code generating
 	pdfCode << catalog.generateCode();
 	
-	// Byte offset measuring
+	// Byte offset measuring (Cross reference table generating)
 	code = catalog.getCode();
-	xrefTable.setOffset(catalog.getObjectNo(), code.size());
+	crossReferenceTable.setOffset(catalog.getObjectNo(), code.size());
 
 	// 3. Parent page (Pages) code generating
 	pdfCode << parentPage.generateCode();
 	
-	// Byte offset measuring
+	// Byte offset measuring (Cross reference table generating)
 	code.clear();
 	code = parentPage.getCode();
-	xrefTable.setOffset(parentPage.getObjectNo(), code.size());
+	crossReferenceTable.setOffset(parentPage.getObjectNo(), code.size());
 
 	// 4. Child pages (Page) code generating
 	for (vector<Page>::iterator i = pages.begin();
@@ -701,10 +700,10 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	{
 		pdfCode << i->generateCode();
 
-		// Byte offset measuring
+		// Byte offset measuring (Cross reference table generating)
 		code.clear();
 		code = i->getCode();
-		xrefTable.setOffset(i->getObjectNo(), code.size());
+		crossReferenceTable.setOffset(i->getObjectNo(), code.size());
 	}
 
 	// 5. Font (PrimaryFont) code generating
@@ -714,10 +713,10 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	{
 		pdfCode << i->generateCode();
 		
-		// Byte offset measuring
+		// Byte offset measuring (Cross reference table generating)
 		code.clear();
 		code = i->getCode();
-		xrefTable.setOffset(i->getObjectNo(), code.size());
+		crossReferenceTable.setOffset(i->getObjectNo(), code.size());
 	}
 
 	// 6. Text stream code generating
@@ -728,10 +727,10 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	{
 		pdfCode << i->generateCode();
 
-		// Byte offset measuring
+		// Byte offset measuring (Cross reference table generating)
 		code.clear();
 		code = i->getCode();
-		xrefTable.setOffset(i->getObjectNo(), code.size());
+		crossReferenceTable.setOffset(i->getObjectNo(), code.size());
 	}
 
 	// 7. Subfont (descendant font) code generating
@@ -741,10 +740,10 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	{
 		pdfCode << i->generateCode();
 
-		// Byte offset measuring
+		// Byte offset measuring (Cross reference table generating)
 		code.clear();
 		code = i->getCode();
-		xrefTable.setOffset(i->getObjectNo(), code.size());
+		crossReferenceTable.setOffset(i->getObjectNo(), code.size());
 	}
 
 	// 8. Font descriptor code generating
@@ -754,15 +753,15 @@ void ProducePdf::generateNewPdfCode(Header& header, Catalog& catalog,
 	{
 		pdfCode << i->generateCode();
 		
-		// Byte offset measuring
+		// Byte offset measuring (Cross reference table generating)
 		code.clear();
 		code = i->getCode();
-		xrefTable.setOffset(i->getObjectNo(), code.size());
+		crossReferenceTable.setOffset(i->getObjectNo(), code.size());
 	}
 
 	// 9. Cross reference table code generating
-	pdfCode << xrefTable.generateCode();
-	vector<std::pair<int, size_t>>& offsets = xrefTable.getOffsets();
+	pdfCode << crossReferenceTable.generateCode();
+	vector<std::pair<int, size_t>>& offsets = crossReferenceTable.getOffsets();
 
 	// 10. Trailer code generating
 	pdfCode << trailer.generateCode(offsets.back().second);

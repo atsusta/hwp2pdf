@@ -54,9 +54,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -90,20 +87,17 @@
     <ClInclude Include="Stream.h">
       <Filter>헤더 파일\File Body</Filter>
     </ClInclude>
-    <ClInclude Include="XrefTable.h">
-      <Filter>헤더 파일\Cross Reference Table</Filter>
-    </ClInclude>
     <ClInclude Include="Trailer.h">
       <Filter>헤더 파일\File Trailer</Filter>
     </ClInclude>
     <ClInclude Include="UTF8Conv.h">
       <Filter>헤더 파일\Libraries</Filter>
     </ClInclude>
+    <ClInclude Include="CrossReferenceTable.h">
+      <Filter>헤더 파일\Cross Reference Table</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="xh2pdf.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -140,14 +134,14 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\File Body</Filter>
     </ClCompile>
-    <ClCompile Include="XrefTable.cpp">
-      <Filter>소스 파일\Cross Reference Table</Filter>
-    </ClCompile>
     <ClCompile Include="Trailer.cpp">
       <Filter>소스 파일\File Trailer</Filter>
     </ClCompile>
     <ClCompile Include="Header.cpp">
       <Filter>소스 파일\File Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossReferenceTable.cpp">
+      <Filter>소스 파일\Cross Reference Table</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

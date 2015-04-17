@@ -3,10 +3,10 @@
 #include "HwpXmlInflation.h"
 #include "Header.h"
 #include "Stream.h"
-#include "Dictionary.h"
-#include "XrefTable.h"
-#include "Trailer.h"
 #include "Font.h"
+#include "Dictionary.h"
+#include "CrossReferenceTable.h"
+#include "Trailer.h"
 
 #include <fstream>
 #include <vector>
@@ -26,7 +26,7 @@ public:
 	ProducePdf();
 	~ProducePdf();
 	bool getPageContentInformation(char* inputFileName, char* outputFileName, 
-		ofstream& pdfCode/*, char* imageFileName*/);
+		ofstream& pdfCode /*, char* imageFileName*/);
 	
 	void initializeNewPdfObject(BodyTextInfo bodyTextInfo,
 		vector<PageSize>& tempPageSizeCollection,
@@ -40,7 +40,7 @@ public:
 		vector<Page>& pageCollection, vector<PrimaryFont>& primaryFontCollection,
 		vector<Text>& textCollection, vector<SubFont>& subFontCollection,
 		vector<FontDescriptor>& fontDescriptorCollection, Trailer& trailer,
-		XrefTable& xrefTable, ofstream& code);
+		CrossReferenceTable& crossReferenceTable, ofstream& code);
 
 	char* readFileBytes(const char *name);
 

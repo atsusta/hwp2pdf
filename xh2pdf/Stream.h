@@ -52,7 +52,8 @@ public:
 	void setLineSegs(vector<LineSeg> lineSegs);
 	void setFontNumber(int fontNumber);
 	void setFormType(int type);
-	void setMatrix(double m1, double m2, double m3, double m4, double m5, double m6);
+	void setMatrix(double m1, double m2, double m3, double m4, double m5, 
+		double m6);
 
 	void referenceObjectNo(int objectNo);
 	string generateCode();
