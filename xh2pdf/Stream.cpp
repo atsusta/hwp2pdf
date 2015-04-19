@@ -64,9 +64,9 @@ void Text::setResources(string resources)
 	this->resources = resources;
 }
 
-void Text::setFontNumber(int fontNumber)
+void Text::setFontNo(int fontNo)
 {
-	this->usedFonts.push_back(fontNumber);
+	this->usedFonts.push_back(fontNo);
 }
 
 
@@ -91,8 +91,8 @@ void Text::setMatrix(double m1, double m2, double m3, double m4, double m5,
 	this->matrix[5] = m6;
 }
 
-void Text::referenceObjectNo(int ref) {
-	usedFonts.push_back(ref);
+void Text::referenceObjectNo(int objectNo) {
+	usedFonts.push_back(objectNo);
 }
 
 string Text::generateCode() {

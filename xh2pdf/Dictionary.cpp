@@ -103,9 +103,9 @@ void Page::setResources(int resource)
 	this->fontResources.push_back(resource);
 }
 
-void Page::referenceObjectNo(int objectNum)
+void Page::referenceObjectNo(int objectNo)
 {
-	this->parent = objectNum;
+	this->parent = objectNo;
 }
 
 string Page::generateCode()
@@ -234,10 +234,10 @@ void Pages::setCount()
 	this->count++;
 }
 
-void Pages::referenceObjectNo(int reference)
+void Pages::referenceObjectNo(int objectNo)
 {
 	// Get page object
-	this->kids.push_back(reference);
+	this->kids.push_back(objectNo);
 }
 
 string Pages::generateCode()

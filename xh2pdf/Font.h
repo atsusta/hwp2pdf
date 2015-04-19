@@ -50,7 +50,7 @@ public:
 	SubFont();
 	string getCidSystemInfo();
 	void setBaseFont(string fontName);
-	void setFontDescriptor(int objectNo);
+	void setFontDescriptor(int fontDescriptor);
 	void setW(int w1, int w2, int w3);
 	void setDw(int w);
 	void setCidSystemInfo(string cidSystemInfo);
@@ -86,8 +86,8 @@ public:
 	void setAscent(int ascent);
 	void setDescent(int descent);
 	void setCapHeight(int height);
-	void setStemV(int h);
-	void setStemH(int v);
+	void setStemV(int horizontal);
+	void setStemH(int vertical);
 	void setFontStretch(string stretch);
 	void setFontWeight(int weight);
 	void setXHeight(int height);

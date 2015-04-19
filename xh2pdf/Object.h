@@ -64,7 +64,7 @@ public:
 	Object();
 	int getObjectNo();
 	string getCode();
-	void setObjectNo(int num);
+	void setObjectNo(int objectNo);
 	void setType(string type);
 
 	virtual void referenceObjectNo(int objectNo) = 0; 

@@ -50,7 +50,7 @@ public:
 	void setBbox(int b1, int b2, int b3, int b4);
 	void setResources(string resource);
 	void setLineSegs(vector<LineSeg> lineSegs);
-	void setFontNumber(int fontNumber);
+	void setFontNo(int fontNo);
 	void setFormType(int type);
 	void setMatrix(double m1, double m2, double m3, double m4, double m5, 
 		double m6);

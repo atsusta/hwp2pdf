@@ -19,9 +19,9 @@ string Object::getCode()
 	return this->code;
 }
 
-void Object::setObjectNo(int num)
+void Object::setObjectNo(int objectNo)
 {
-	this->objectNo = num;
+	this->objectNo = objectNo;
 }
 
 void Object::setType(string type)

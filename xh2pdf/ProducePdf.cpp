@@ -389,7 +389,7 @@ bool ProducePdf::getPageContentInformation(char* inputFileName, char* outputFile
 		for (unsigned int i = 1; i <= pageScopeFonts.size(); i++) {
 			// Used Resource(font number) setting 
 			// Represented in PDF as '/F1 /F2 /F3 /F4 ...'
-			aText.setFontNumber(i);
+			aText.setFontNo(i);
 		}
 
 		texts.push_back(aText);

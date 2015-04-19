@@ -44,7 +44,7 @@ string Trailer::generateCode() {
 	return this->code;
 }
 
-string Trailer::generateCode(size_t xrefTableOffset) {
+string Trailer::generateCode(size_t crossReferenceTableOffset) {
 	this->code.append("trailer");
 	this->code.push_back('\n');
 	this->code.append("<<");
@@ -66,7 +66,7 @@ string Trailer::generateCode(size_t xrefTableOffset) {
 	this->code.append("startxref");
 	this->code.push_back('\n');
 
-	this->code.append(to_string(xrefTableOffset));
+	this->code.append(to_string(crossReferenceTableOffset));
 
 	// Replaced to byte size mesured by cross reference table
 	this->code.append("\n%%EOF");

@@ -18,7 +18,7 @@ public:
 	void setSize(int size);
 	void setRoot(int root);
 	string generateCode();
-	string generateCode(size_t XrefTableOffset);
+	string generateCode(size_t crossReferenceTableOffset);
 
 private:
 	int size;

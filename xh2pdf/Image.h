@@ -13,7 +13,7 @@ public:
 	void setLength(int length);
 	void setName(int name);
 	void setImageMask(bool imageMask);
-	void setBitsPerComponent(int bitsperComponent);
+	void setBitsPerComponent(int bitsPerComponent);
 	void setWidth(int width);
 	void setHeight(int height);
 	

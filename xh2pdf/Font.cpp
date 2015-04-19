@@ -20,14 +20,14 @@ void PrimaryFont::setEncoding(string encoding)
 	this->encoding = encoding;
 }
 
-void PrimaryFont::setDescendantFonts(int ref)
+void PrimaryFont::setDescendantFonts(int descndantFont)
 {
-	this->descendantFonts.push_back(ref);
+	this->descendantFonts.push_back(descndantFont);
 }
 
-void PrimaryFont::referenceObjectNo(int ref)
+void PrimaryFont::referenceObjectNo(int objectNo)
 {
-	this->descendantFonts.push_back(ref);
+	this->descendantFonts.push_back(objectNo);
 }
 
 string PrimaryFont::generateCode()
@@ -115,9 +115,9 @@ void SubFont::setBaseFont(string fontName)
 	this->baseFont = fontName;
 }
 
-void SubFont::setFontDescriptor(int ref)
+void SubFont::setFontDescriptor(int fontDescriptor)
 {
-	this->fontDescriptor = ref;
+	this->fontDescriptor = fontDescriptor;
 }
 
 void SubFont::setW(int w1, int w2, int w3)
@@ -244,14 +244,14 @@ void FontDescriptor::setCapHeight(int height)
 	this->capHeight = height;
 }
 
-void FontDescriptor::setStemV(int h)
+void FontDescriptor::setStemV(int horizontal)
 {
-	this->stemH = h;
+	this->stemH = horizontal;
 }
 
-void FontDescriptor::setStemH(int v)
+void FontDescriptor::setStemH(int vertical)
 {
-	this->stemV = v;
+	this->stemV = vertical;
 }
 
 void FontDescriptor::setFontStretch(string stretch)
@@ -269,9 +269,9 @@ void FontDescriptor::setXHeight(int height)
 	this->xHeight = height;
 }
 
-void FontDescriptor::referenceObjectNo(int ref)
+void FontDescriptor::referenceObjectNo(int objectNo)
 {
-
+	// no use
 }
 
 string FontDescriptor::generateCode()
