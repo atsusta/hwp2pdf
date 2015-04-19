@@ -41,7 +41,8 @@ string Catalog::generateCode()
 		// Pages
 		this->code.append("/Pages ");
 		this->code.append(to_string(this->pages));
-		this->code.append(" 0 R");	this->code.push_back('\n');
+		this->code.append(" 0 R");
+		this->code.push_back('\n');
 
 	this->code.append(">>");
 	this->code.push_back('\n');
@@ -93,9 +94,9 @@ void Page::setCropBox(double c1, double c2, double c3, double c4)
 	this->cropbox[3] = c4;
 }
 
-void Page::setContents(int ref)
+void Page::setContents(int contents)
 {
-	this->contents = ref;
+	this->contents = contents;
 }
 
 void Page::setResources(int resource)
@@ -156,9 +157,9 @@ string Page::generateCode()
 				this->code.push_back('\n');
 				this->code.append("\t\t");
 				this->code.append("/a0 ");
-					this->code.append("<<");
-						this->code.append(" /CA 1 /ca 1");
-					this->code.append(" >>");
+				this->code.append("<<");
+					this->code.append(" /CA 1 /ca 1");
+				this->code.append(" >>");
 				this->code.push_back('\n');
 				this->code.append("\t");
 			this->code.append(">>");	
