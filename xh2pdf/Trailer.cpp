@@ -1,18 +1,20 @@
-
 #include "Trailer.h"
 
 // Class : Trailer
 // Description : set root of file body.
 // Trailer also provides document information object(optional).
-void Trailer::setSize(int size) {
+void Trailer::setSize(int size)
+{
 	this->size = size;
 }
 
-void Trailer::setRoot(int root) {
+void Trailer::setRoot(int root)
+{
 	this->root = root;
 }
 
-string Trailer::generateCode() {
+string Trailer::generateCode()
+{
 	this->code.append("trailer");
 	this->code.push_back('\n');
 	this->code.append("<<");
@@ -44,7 +46,8 @@ string Trailer::generateCode() {
 	return this->code;
 }
 
-string Trailer::generateCode(size_t crossReferenceTableOffset) {
+string Trailer::generateCode(size_t crossReferenceTableOffset)
+{
 	this->code.append("trailer");
 	this->code.push_back('\n');
 	this->code.append("<<");

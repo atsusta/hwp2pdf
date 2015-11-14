@@ -1,4 +1,3 @@
-
 #include "HwpXmlInflation.h"
 #include <windows.h>
 
@@ -245,11 +244,9 @@ Paragraph::Paragraph()
 	lineSegs.clear();
 }
 
-
 Paragraph::~Paragraph()
 {
 }
-
 
 vector<LineSeg>& Paragraph::getLineSegs()
 {

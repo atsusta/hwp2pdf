@@ -1,4 +1,3 @@
-
 #include "Object.h"
 
 // Class : Object

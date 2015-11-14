@@ -1,11 +1,9 @@
 // xh2pdf.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
-//#include <stdlib.h>
-//#include <ctime>
 #include "stdafx.h"
 #include "ProducePdf.h"
-
 #include <fstream>
 #include <iostream>
+
 using namespace std;
 
 /* int _tmain(int argc, _TCHAR* argv[]) */
@@ -52,5 +50,4 @@ int _tmain(int argc, char* argv[])
 		cerr << "File produce error. file is " << isFileRight << endl;
 		return -1;
 	}
-
 }

@@ -1,17 +1,19 @@
-
 #include "CrossReferenceTable.h"
 #include <iostream>
+
 using namespace std;
 
 // Class : CrossReferenceTable
 // Description : Cross reference table of Pdf object.
 // It provides random access for PDF viewer.
-CrossReferenceTable::CrossReferenceTable() {
+CrossReferenceTable::CrossReferenceTable()
+{
 	this->offsets.clear();
 	// this->offsetMap.clear();
 }
 
-CrossReferenceTable::~CrossReferenceTable() {
+CrossReferenceTable::~CrossReferenceTable()
+{
 
 }
 
@@ -32,18 +34,16 @@ void CrossReferenceTable::setOffset(int objectNo, size_t size)
 	}
 }
 
-
-vector<std::pair<int, size_t>>& CrossReferenceTable::getOffsets()
+vector<pair<int, size_t>>& CrossReferenceTable::getOffsets()
 {
 	return this->offsets;
 }
 
-
+/* Deprecated unordered_map version : getOffsetMap() */
 //unordered_map<int, size_t>& CrossReferenceTable::getOffsetMap()
 //{
 //	return this->offsetMap;
 //}
-
 
 string CrossReferenceTable::getCode()
 {
@@ -67,7 +67,7 @@ string CrossReferenceTable::generateCode() {
 
 	// Sort offset of each objects
 	// 직전 code의 크기가 해당 object의 offset이 된다.
-	for (vector<std::pair<int, size_t>>::reverse_iterator i = offsets.rbegin();
+	for (vector<pair<int, size_t>>::reverse_iterator i = offsets.rbegin();
 		i != offsets.rend();
 		++i)
 	{
@@ -78,15 +78,15 @@ string CrossReferenceTable::generateCode() {
 
 		if (i == --offsets.rend())
 		{
-			// #object 0 : offset 0
+			// The offset of the first object is 0
 			i->second = 0;
 			cout << "---------------------------------\n"
 				<< "object number : 0\t offset : " << i->second << endl;
 		}
 		else
 		{
-			// Set byte size of previous object as byte offset of present object
-			vector<std::pair<int, size_t>>::reverse_iterator j = i;
+			// Byte size of previous object is byte offset of current object
+			vector<pair<int, size_t>>::reverse_iterator j = i;
 			++j;
 			i->second = j->second;
 			cout << "object number : " << i->first << 
@@ -99,7 +99,7 @@ string CrossReferenceTable::generateCode() {
 	for (int objectNo = 0; objectNo <= objects_alive; objectNo++)
 	{ 
 		// Find each number
-		for (vector<std::pair<int, size_t>>::iterator i = offsets.begin();
+		for (vector<pair<int, size_t>>::iterator i = offsets.begin();
 			i != offsets.end();
 			++i)
 		{
@@ -112,12 +112,12 @@ string CrossReferenceTable::generateCode() {
 
 				if (i == offsets.begin())
 				{
-					// Revision yes
+					// There is revisions
 					sprintf_s(rev, sizeof(rev), "%05d", 65535);
 				}
 				else
 				{
-					// Revision no
+                    // There is not revisions
 					sprintf_s(rev, sizeof(rev), "%05d", 0);
 				}
 				code.append(rev);
@@ -140,21 +140,17 @@ string CrossReferenceTable::generateCode() {
 
 	// Cross reference table offset setting
 	this->offsets.push_back(make_pair(65535, xrefTableOffset));
-	
 	this->code.shrink_to_fit();
-	return this->code;
+	
+    return this->code;
 
-
-	/* Deprecated unordered_map version - code generating */
-
+	/* Deprecated unordered_map version - generate code */
 	//for (unordered_map<int, size_t>::iterator findIter = this->offsetMap.begin();
 	//	findIter != this->offsetMap.end();
 	//	++findIter)
 	//{
 	//	cout << "object number : " << findIter->first << ", offset : " << findIter->second << endl;
 	//}
-
-
 
 	//// set each offset's to right position 
 	//for (unordered_map<int, size_t>::iterator findIter = this->offsetMap.end();
@@ -203,7 +199,6 @@ string CrossReferenceTable::generateCode() {
 }
 
 /* Deprecated array version - methods*/
-
 //void CrossReferenceTable::setOffset(long int* offset, int objectSize) {
 //	this->offset = new long[objectSize];
 //		

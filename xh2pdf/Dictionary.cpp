@@ -1,6 +1,4 @@
-
 #include "Dictionary.h"
-
 #include <string>
 
 /**
@@ -8,7 +6,8 @@
  * Description : super class for reference-focused objects.
  *  This is abstract class.
  */
-void Dictionary::setSubtype(string subtype) {
+void Dictionary::setSubtype(string subtype)
+{
 	this->subtype = subtype;
 }
 
@@ -16,7 +15,6 @@ void Dictionary::setSubtype(string subtype) {
 // Description : Root of pdf object hierarchy
 Catalog::Catalog()
 {
-	// Catalog
 	this->setType("/Catalog");
 }
 
@@ -220,7 +218,6 @@ string Page::generateCode()
 // Description : Parent page. it manages child pages.
 Pages::Pages()
 {
-	// Parent page
 	this->setType("/Pages");
 	this->count = 0;
 }
@@ -237,7 +234,6 @@ void Pages::setCount()
 
 void Pages::referenceObjectNo(int objectNo)
 {
-	// Get page object
 	this->kids.push_back(objectNo);
 }
 

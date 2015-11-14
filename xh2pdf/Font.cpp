@@ -1,4 +1,3 @@
-
 #include "Font.h"
 
 // Class : PrimaryFont

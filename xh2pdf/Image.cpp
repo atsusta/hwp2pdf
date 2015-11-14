@@ -1,4 +1,3 @@
-
 #include "Image.h"
 
 // Class : Image

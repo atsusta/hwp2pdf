@@ -1,25 +1,10 @@
-﻿빌드 시작: 2015-04-19 오후 8:18:01
-     1>2 노드의 "D:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" 프로젝트(Build 대상)입니다.
+﻿Build started 2015-11-14 오후 9:22:30.
+     1>Project "d:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Dictionary.cpp Font.cpp Header.cpp HwpXmlInflation.cpp Object.cpp ProducePdf.cpp Image.cpp Stream.cpp tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp Trailer.cpp xh2pdf.cpp CrossReferenceTable.cpp
-         CrossReferenceTable.cpp
-         xh2pdf.cpp
-         Trailer.cpp
-         tinyxmlparser.cpp
-         tinyxmlerror.cpp
-         tinyxml.cpp
-         tinystr.cpp
-         Stream.cpp
-         Image.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ProducePdf.cpp
          ProducePdf.cpp
-     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(639): warning C4244: '초기화 중' : 'std::streamoff'에서 'size_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(776): warning C4244: '초기화 중' : 'std::streamoff'에서 'size_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-         Object.cpp
-         HwpXmlInflation.cpp
-         Header.cpp
-         Font.cpp
-         Dictionary.cpp
-         코드를 생성하고 있습니다...
+     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(642): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
+     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(779): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.lib" /MACHINE:X86 Debug\Dictionary.obj
          Debug\Font.obj
@@ -36,9 +21,9 @@
          Debug\Trailer.obj
          Debug\xh2pdf.obj
          Debug\CrossReferenceTable.obj
-         xh2pdf.vcxproj -> D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe
-     1>"D:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+     1>LINK : fatal error LNK1168: cannot open D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe for writing
+     1>Done Building Project "d:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" (Build target(s)) -- FAILED.
 
-빌드했습니다.
+Build FAILED.
 
-경과 시간: 00:00:13.50
+Time Elapsed 00:00:02.98
