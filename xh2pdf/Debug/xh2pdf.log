@@ -1,10 +1,10 @@
-﻿Build started 2015-11-14 오후 9:22:30.
-     1>Project "d:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2015-11-15 오후 5:43:56.
+     1>Project "D:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ProducePdf.cpp
-         ProducePdf.cpp
-     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(642): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
-     1>d:\dev\github\hwp2pdf\xh2pdf\producepdf.cpp(779): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt HwpXmlInflation.cpp xh2pdf.cpp
+         xh2pdf.cpp
+         HwpXmlInflation.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.lib" /MACHINE:X86 Debug\Dictionary.obj
          Debug\Font.obj
@@ -21,9 +21,9 @@
          Debug\Trailer.obj
          Debug\xh2pdf.obj
          Debug\CrossReferenceTable.obj
-     1>LINK : fatal error LNK1168: cannot open D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe for writing
-     1>Done Building Project "d:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" (Build target(s)) -- FAILED.
+         xh2pdf.vcxproj -> D:\dev\GitHub\hwp2pdf\Debug\xh2pdf.exe
+     1>Done Building Project "D:\dev\GitHub\hwp2pdf\xh2pdf\xh2pdf.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:02.98
+Time Elapsed 00:00:02.83
