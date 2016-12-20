@@ -1,5 +1,4 @@
 # hwp2pdf
-
 This console application converts HWP document into PDF document, using [pyhwp](https://github.com/mete0r/pyhwp) tool and [tinyXML2](https://github.com/leethomason/tinyxml2) Library
 
 ## System Architecture
@@ -40,3 +39,4 @@ This console application converts HWP document into PDF document, using [pyhwp](
 | ControlChar   | character information for splitting paragraph |
 
 ## Simple structure of PDF format
+...
