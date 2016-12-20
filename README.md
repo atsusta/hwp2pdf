@@ -38,3 +38,5 @@ This console application converts HWP document into PDF document, using [pyhwp](
 | Text          | text contents |
 | Image         | image contents |
 | ControlChar   | character information for splitting paragraph |
+
+## Simple structure of PDF format
