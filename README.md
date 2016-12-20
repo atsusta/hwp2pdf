@@ -6,7 +6,7 @@ This console application converts HWP document into PDF document, using [pyhwp](
 ```
    INPUT                          OUTPUT #1                        OUTPUT #2
 ------------    \---------/    ----------------    \---------/    ------------
-|   HWP    | ->    pyhwp    -> | BodyText.xml | ->    xh2pdf   -> |   PDF    |
+|   HWP    | ->  | pyhwp |  -> | BodyText.xml | ->  | xh2pdf|  -> |   PDF    |
 ------------    /---------\    ----------------    /---------\    ------------
 ```
 
